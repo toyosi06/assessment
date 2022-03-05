@@ -1,0 +1,30 @@
+*{ 
+
+    box-sizing: border-box; 
+}
+
+body { 
+    margin: 0;
+    padding: 0; 
+}
+  .navbar { 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #333; 
+    color: white;
+  }
+  
+  .navbar-links ul { 
+    list-style: none; 
+  } 
+  
+    .navbar-links li a { 
+      padding: 1 rem; 
+      display: block;
+
+  }
+.navbar-links li:hover { 
+  background-color: #555; 
+}
+  
