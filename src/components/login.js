@@ -5,10 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginvalidationSchema } from '../form-utils';
 import { useFormik } from "formik";
 import { signIn } from '../services/auth';
+import Home from './secure/home';
 
 
 function Login() {
-    // const [processing, setProcessing] = useState(false)
+ const [processing, setProcessing] = useState(false)
     const navigate = useNavigate()
     const [serverError, setServerError] = useState("")
     const formik = useFormik({
@@ -21,18 +22,21 @@ function Login() {
             signIn(values, onSuccess, onFailure);
         },
         validationSchema: loginvalidationSchema,
-        onSubmit: (values, onSuccess, onFailure) => {
-        }
+        
     })
     const onSuccess = () => {
         {
-            //callbackonsuccess
+            navigate ("/home"); 
         }
 
     }
-    const onFailure = (message) => {
-        setServerError(message);
+     
+        const onFailure = (message) => {
+    
+        setServerError("The username or password you entered is invalid!");
+       
     }
+   
 
 
     return (
@@ -49,7 +53,7 @@ function Login() {
                         </ul>
                     </div>
                 </nav>
-            </div>
+            </div>1
             <div className="grid grid-rows-2">
                 <div>
                     <header className='text-center text-3xl text-white font-serif'>
@@ -57,7 +61,7 @@ function Login() {
                     </header>
                 </div>
                 <div className='grid grid-cols-2'>
-                    <div className='w-[600px] h-[500px] absolute top-[200px] left-[450px] p-[100px] bg-gradient-to-r from-gray-300 to-slate-50 opacity-75 text-center'>
+                    <div className='box-border w-[600px] h-[500px] absolute top-[200px] left-[450px] p-[100px] bg-white opacity-75 text-center shadow-2xl rounded-lg'>
                         <form onSubmit={formik.handleSubmit}>
                             <div className='text-center font-serif text-2xl text-orange-900'> <h2 className='text-center gap-20'>Log In</h2></div>
                             
@@ -69,9 +73,9 @@ function Login() {
                             <div> <label> Password</label>
                                 <input type="password" name="password" id="password" onChange={formik.handleChange} value={formik.values.password} placeholder="Enter Password" /></div>
                             <div className="text-red-500 text-xs"> {formik.errors.password}</div>
-                            <button type="submit">Submit </button>
+                            <button className="bg-sky-500" type="submit">Submit </button>
                             
-                            <div> {serverError}</div>
+                            <div className= "text-red-500 text-xs"> {serverError}</div>
 
                         </form>
 
