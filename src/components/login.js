@@ -42,18 +42,16 @@ function Login() {
     return (
 
         <div className='background_image'>
-            <div>
-                <nav className='navbar'>
+            <div className='navbar'>
                     <div className="brand-title"> JHBcodes</div>
                     <div className="navbar-links">
                         <ul>
-                            <li> <Link to="about" >About</Link> </li>
-                            <li> <Link to="signup">Sign Up</Link> </li>
-                            <li> <Link to="contactus">Contact Us</Link> </li>
+                        <li> <Link to="/about">About</Link> </li>
+                            <li> <Link to="/signup">Sign Up</Link> </li>
+                            <li> <Link to="/contactus">Contact Us</Link> </li>
                         </ul>
                     </div>
-                </nav>
-            </div>1
+            </div>
             <div className="grid grid-rows-2">
                 <div>
                     <header className='text-center text-3xl text-white font-serif'>
@@ -80,7 +78,7 @@ function Login() {
                         </form>
 
 
-                        <nav className=''> <Link to="forgotpassword">Forgot Password</Link> </nav>
+                        <div onClick={() => {navigate("/forgotpassword")}} >  Forgot Password </div>
 
                     </div>
 

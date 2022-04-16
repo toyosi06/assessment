@@ -8,11 +8,12 @@ import App from '../App'
 import NotFound from '../components/notfound'
 import Home from "../components/secure/home";
 import RequireAuth from "../services/require-auth";
+import Homepage from "../components/homepage";
 
 const MyRoutes = () => {
     return (
         <Routes>
-            < Route path="/" element={<Login />} />
+            < Route path="/" element={<Homepage />} />
             < Route path="/about" element={<About />} />
             < Route path="/contactus" element={<Contactus />} />
             < Route path="/forgotpassword" element={<Forgotpassword />} />

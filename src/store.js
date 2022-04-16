@@ -2,7 +2,9 @@ import { createState } from "@hookstate/core"
 
 export const initial = {
     user: {},
-    questions: []
+    questions: [],
+    answers: {}, 
+    results: [],
 
 }
 const store = createState(initial)

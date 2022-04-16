@@ -45,7 +45,7 @@ export const signIn = ({ email, password }, onSuccess, onFailure) => {
         });
 }
 
-export const resetPassword = (email, onSuccess, onFailure) => {
+export const resetPassword = ({email}, onSuccess, onFailure) => {
     const auth = getAuth();
     sendPasswordResetEmail(auth, email)
         .then(() => {
