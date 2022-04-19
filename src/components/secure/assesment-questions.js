@@ -3,6 +3,9 @@ import { useFormik } from "formik";
 import { useState as useGlobalState } from "@hookstate/core";
 import store from "../../store";
 import { submitAnswers } from "../../services/questions";
+import { questionsvalidationSchema } from "../../form-utils";
+import {useNavigate } from "react-router";
+
  
 
 const AssessmentQuestions = ({ listOfQuestions, answersDictionary }) => {
@@ -11,6 +14,7 @@ const AssessmentQuestions = ({ listOfQuestions, answersDictionary }) => {
    const [previousAnswers, setPreviousAnswers] = useState({})
    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
    const [processing, setProcessing] = useState(false)
+   const navigate = useNavigate()
    const q = listOfQuestions[currentQuestionIndex]
    const questionId = q?.id
    const selectedAnswers = answersDictionary[questionId]
@@ -23,7 +27,7 @@ const AssessmentQuestions = ({ listOfQuestions, answersDictionary }) => {
        },
        onSubmit: async (values) => {
            setProcessing(true)
-           submitAnswers(answers, onSuccess)
+           submitAnswers(answers, onSuccess, true)
        },
    })
    const questionsIndex = currentQuestionIndex
@@ -40,41 +44,63 @@ const AssessmentQuestions = ({ listOfQuestions, answersDictionary }) => {
    const onNextSuccess = (answers) => {
        setCurrentQuestionIndex(currentQuestionIndex + 1)
        setPreviousAnswers(answers)
+       
    }
+ 
+
+
    const onSuccess = (answers) => { 
-       //navigate to somewhere else 
+       navigate("/results")
    }
+   
+
  
    let buttonHtml;
    if (questionsIndex === 0) {
        buttonHtml = (
            <>
-               <button className-='text-white bg-blue-700 hover:bg-blue-800' onClick={next} type="button">Next</button>
+           <div className="text-center text-white bg-blue-900 hover:bg-blue-700 absolute bottom-[20px] text w-[130px] h-[60px] text-5xl right-[20px]"> 
+               <button onClick={next} type="button">Next</button>
+            </div>
            </>
        );
-   } else if (questionsIndex === listOfQuestions.length - 1) {
+   } else if (questionsIndex === listOfQuestions.length -1) {
        buttonHtml = (
            <>
+           <div className="grid grid-cols-2"> 
+           <div className="text-center text-white bg-blue-900 hover:bg-blue-700 absolute bottom-[20px] text w-[175px] h-[60px] text-5xl right-[190px]"> 
                <button onClick={previous} type="button">Previous</button>
-               <button type="Submit" className="">Submit</button>
+            </div>
+            <div className="text-center text-white bg-blue-900 hover:bg-blue-700 absolute bottom-[20px] text w-[150px] h-[60px] text-5xl right-[20px]"> 
+               <button type="submit" className="">Submit</button>
+            </div>
+            </div> 
            </>
        );
    } else {
+       buttonHtml =(
        <>
-           <button onClick={previous} type="button">Previous</button>
+       <div className="grid grid-cols-2"> 
+       <div className="text-center text-white bg-blue-900 hover:bg-blue-700 absolute bottom-[20px] text w-[175px] h-[60px] text-5xl right-[190px]"> 
+               <button onClick={previous} type="button">Previous</button>
+            </div>
+        <div className="text-center text-white bg-blue-900 hover:bg-blue-700 absolute bottom-[20px] text w-[150px] h-[60px] text-5xl right-[20px]"> 
            <button onClick={next} type="button">Next</button>
-       </>;
- 
+        </div>
+         </div>
+       </>
+       )
    }
    return (
-       <form onSubmit={formik.handleSubmit} className="text-center box-border w-[1000px] h-[500px] w-[600px] h-[500px] absolute top-[100px] left-[200px] p-[100px] bg-white">
-           <div className="text-left">Question {questionsIndex + 1}</div>
-           <div>{q?.question}</div>
+       <form onSubmit={formik.handleSubmit} className="text-center box-border w-[1000px] h-[500px] absolute top-[100px] left-[200px]  bg-white rounded-lg">
+           <div className="text-left mt-6 ml-5 text-6xl font-extrabold font-sans text-blue-900">Question {questionsIndex + 1}</div>
+           <div className='p-[100px]'>  
+           <div className="text-3xl absolute top-[130px] text-center left-[50px]">{q?.question}</div>
            <div>{q?.type === "multiple-choice" ?
                <>{q?.options.map((o, optionsIndex) => {
                    return (
                        <div key={`option${optionsIndex}`}>
-                           <input
+                           <input 
                                type="radio"
                                id={`${q.id}-option${optionsIndex}`}
                                name={`${q.id}-option${optionsIndex}`}
@@ -94,8 +120,8 @@ const AssessmentQuestions = ({ listOfQuestions, answersDictionary }) => {
                })}</>
                :
  
-               <div>
-                   Answer:<input id="Answer" name="Answer" placeholder='Enter Answer' value={answers?.answer}
+               <div className="absolute bottom-[220px] left-[210px] ">
+                   <input className='text-5xl border-solid border-blue-900 border-4 black rounded-lg text-center 'id="Answer" name="Answer" placeholder='Enter Answer' value= {answers?.answer}
                    onChange={(e) => {
                        setAnswers({ ...answers, answer: e.target.value, questionId: q.id, uid: user.uid.get() })
                        }} />
@@ -105,11 +131,12 @@ const AssessmentQuestions = ({ listOfQuestions, answersDictionary }) => {
  
  
  
-           <div className="text-center text-white bg-blue-700 hover:bg-blue-800">
+           <div className="">
                {buttonHtml}
            </div>
- 
+         </div>
        </form>
+       
  
    );
 };

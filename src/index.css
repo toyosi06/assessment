@@ -10,10 +10,25 @@ body {
 }
 .background_image{
   width: 100%;  
-  background: linear-gradient(to top, rgba(0,0,0,0.5)50%, rgba(0,0,0,0.5)50%), url(/src/images/img2.jpg);
+  background: linear-gradient(to top, rgba(0,0,0,0.5)100%, rgba(0,0,0,0.5)100%), url(/public/images/aboutpic1.png);
+  background-position: center; 
+  background-size: cover; 
+  height: 60vh; 
+} 
+.firstbg_image{ 
+  width: 100%;  
+  background: linear-gradient(to top, rgba(16, 16, 62, 0.5)100%, rgba(0,0,0,0.5)100%), url(/public/images/image.jpg);
   background-position: center; 
   background-size: cover; 
   height: 109vh; 
+}
+
+.background2_image{
+  width: 100%;  
+  background: linear-gradient(to top, rgba(0,0,0,0.5)100%, rgba(0,0,0,0.5)100%), url(/public/images/outside.jpg);
+  background-position: center; 
+  background-size: cover; 
+  height: 75vh; 
 } 
 
 .testbg_color { 
@@ -40,7 +55,7 @@ body {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    background-color: #333; 
+    background-color: rgb(54, 60, 77); 
     color: white;
   }
   .brand-title { 

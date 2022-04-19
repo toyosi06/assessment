@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
    const [serverError, setServerError] = useState("")
+   const navigate = useNavigate()
    const formik = useFormik({
       initialValues: {
          email: "",
@@ -20,15 +21,16 @@ function ForgotPassword() {
    })
    const onSuccess = () => {
       {
-         //callbackonsuccess
+         navigate ("/emailsent"); 
       }
 
    }
    const onFailure = (message) => {
-      setServerError(message);
+      setServerError("Please use a Real Email!");
    }
    return (
-      <div className='grid grid-cols-2 h-screen bg-blue-300'>
+      <div className='grid grid-cols-2 h-screen  bg-blue-300'>
+         <div className="absolute top-[30px] right-[40px] font-bold text-xl text-blue-600 hover:text-blue-800" onClick={() => {navigate("/login")}} >  Back to Login </div>
          <form onSubmit={formik.handleSubmit}>
             <div className="ml-6 mt-10">
                <div className='text-center grid grid-rows-2'> 
@@ -49,12 +51,13 @@ function ForgotPassword() {
                   <div className='text-2xl ml-4 absolute top-[200px] font-sans font-light '> <label> Email</label> </div>
                   <div> 
                   <div className="text-center text-3xl border-solid border-2 sky-500 w-[310px] rounded-lg absolute right-[80px]"> <input type="text" name="email" id='email' placeholder="Enter Email" value={formik.values.email} onChange={formik.handleChange} /> </div> 
-                     <div className="text-red-500 text-center absolute bottom-[190px] right-[200px]">  {formik.errors.email} </div>
+                     <div className="text-red-500 text-center absolute bottom-[190px] right-[190px]">  {formik.errors.email} </div>
                   </div>
                </div>
-               <div className='text-center mb-10 text-3xl bg-blue-400 w-[200px] h-[50px] rounded-lg absolute bottom-[10px] right-[130px]'>
+               <div className='text-center mb-10 text-3xl bg-blue-400 w-[200px] h-[50px] rounded-lg absolute bottom-[10px] right-[130px] hover:bg-blue-800'>
                   <button type="submit" className=' font-sans font-extrabold text-white'> Submit </button>
                </div>
+               <div className= "text-red-500 absolute bottom-[160px] right-[160px]"> {serverError} </div>
             </div>
       
          </form>

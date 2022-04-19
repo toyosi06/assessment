@@ -9,6 +9,8 @@ import NotFound from '../components/notfound'
 import Home from "../components/secure/home";
 import RequireAuth from "../services/require-auth";
 import Homepage from "../components/homepage";
+import Results from "../components/secure/results";
+import Emailsent from "../components/emailsent";
 
 const MyRoutes = () => {
     return (
@@ -20,11 +22,17 @@ const MyRoutes = () => {
             < Route path='/signup' element={<Signup />} />
             < Route path="*" element={<NotFound/>} />
             < Route path= "/login" element= {<Login /> }/> 
+            < Route path= "/emailsent" element= {<Emailsent /> }/> 
             <Route path= "/Home" element= {
             < RequireAuth> 
                 <Home /> 
             </RequireAuth> 
             }/>
+            <Route path= "/results" element= {
+            < RequireAuth> 
+                <Results /> 
+            </RequireAuth> 
+            }/> 
 
         </Routes>
     )

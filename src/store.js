@@ -1,9 +1,9 @@
 import { createState } from "@hookstate/core"
 
 export const initial = {
-    user: {},
+    user: {isAuthenticated:false},
     questions: [],
-    answers: {}, 
+    answers : {}, 
     results: [],
 
 }
